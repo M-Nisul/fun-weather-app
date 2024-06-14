@@ -5,6 +5,24 @@ import weather from "./weather";
 const navBar = () => {
    const nav = document.querySelector('nav');
    const buttons = nav.querySelectorAll('button');
+   const menu = document.querySelector('.menu');
+
+   menu.addEventListener('click', () => {;
+        if(nav.getAttribute('data-visible') == "false"){
+            nav.setAttribute('data-visible', 'true');
+            menu.classList.add('open');
+        }else{
+            nav.setAttribute('data-visible', 'false');
+            menu.classList.remove('open');
+        }
+   })
+
+    document.querySelector('#container').addEventListener('click', () => {
+        if(nav.getAttribute('data-visible') == "true"){
+            nav.setAttribute('data-visible', 'false');
+            menu.classList.remove('open');
+        }
+    });
 
    buttons.forEach(button => {
         button.addEventListener('click',() => {

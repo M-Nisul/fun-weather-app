@@ -13,7 +13,12 @@
     to {
       transform: translateX(0%); /* Slide in to original position */
     }
-  }
+}
+
+hr{
+    width: 100vw;
+    margin: 0;
+}
 
 :root{
     --text-color: #161d0a;
@@ -21,6 +26,10 @@
     --primary-color: #97c24f;
     --secondary-color: #99dbc9;
     --accent-color: #6cbbcc;
+    --menu: url('../dist/assets/menu-burger.svg');
+    --blur: 2rem;
+    --glass:hsl(0 0 0% / 0.1);
+    --close: url('../dist/assets/cross.svg');
 }
 
 [data-theme="dark"] {
@@ -29,6 +38,10 @@
     --primary-color:#85af3c;
     --secondary-color:#246654;
     --accent-color:#348293;
+    --menu: url('../dist/assets/menu-burger.png');
+    --blur: 4rem; 
+    --glass: hsl(0 0 100% / 0.1);
+    --close: url('../dist/assets/cross.png');
 }
 
 body{
@@ -48,6 +61,7 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-around;
+    padding: 0rem 1rem;
 }
 
 header svg{
@@ -72,13 +86,12 @@ header div i{
 
 header nav{
     display: flex;
-    width: 50%;
-    justify-content: space-around;
+    max-width: 50%;
+    min-width: 30%;
 }
 
 header nav button{
     font-family: 'Poppins',sans-serif;
-    font-size: 1rem;
     background-color: transparent;
     outline: none;
     border: none;
@@ -464,4 +477,189 @@ dialog button{
 dialog button:hover{
     transform: translateY(0, -10px);
     box-shadow: 0 20px 80px -10px var(--primary-color);
+}
+
+#container #weather label{
+    position: absolute;
+    padding-left: 1rem;
+    font-size: 0.8rem;
+}
+
+#container #weather #input:focus ~ label{
+    display: none;
+}
+
+@media (max-width: 600px){
+
+    *{
+        overflow: hidden;
+    }
+
+    header{
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    header div{
+        margin-right: 2rem;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    header div svg{
+        width: 3rem;
+        height: 3rem;
+    }
+
+    nav{
+        flex-direction: column;
+        position: absolute;
+        inset: 0 0 0 0;
+        height: 100vh;
+        justify-content: flex-start;
+        background: hsl(0 0 0 / 0.9);
+        z-index: 100;
+        align-items: center;
+        padding-top: 3rem;
+        transform: translateX(-100%);
+        transition: all 0.3s;
+    }
+
+    nav[data-visible="true"]{
+        transform: translateX(0);
+    }
+
+    nav button{
+        margin: 2rem 0;
+        padding: 0;
+        font-size: 1.3rem;
+        width: 7rem;
+    }
+
+    .menu{
+        position: absolute;
+        width: 2rem;
+        aspect-ratio: 1;
+        background:var(--menu);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        top: 5%;
+        right: 89%;
+        z-index: 9999;
+        border: none;
+        outline: none;
+        
+    }
+
+    .open{
+        background-image: var(--close);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    @supports (backdrop-filter: blur(1rem)){
+        nav{
+            background: var(--glass);
+            backdrop-filter: blur(var(--blur));
+        }
+    }
+
+    .elements{
+        display: none;
+    }
+
+    #container #home #info h1{
+        font-size: 4rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    #container #home #info p{
+        margin: 0;
+        font-size: 1.2rem;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    #container #home button{
+        margin: 0;
+        margin-top: 2rem;
+    }
+
+    #container{
+        overflow: hidden;
+    }
+
+    #container #weatherH1{
+        font-size: 1.7rem;
+        text-align: center;
+    }
+
+    #container #weather{
+        min-width:60%;
+        max-width: 70%;
+        min-height: 20%;
+        max-height: 50%;
+    }
+
+    #container #weather #weatherInfo{
+        width: 100%;
+    }
+
+    #container #weather #weatherInfo h2, h3{
+        font-size: 1rem;
+    }
+
+    #theme{
+        left: 83%;
+        top: 88%;
+    }
+
+    #container #body h1{
+        font-size: 3rem;
+    }
+
+    #container #body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #container #body #image{
+        position: initial;
+        display: block;
+        inset: 0;
+        height: 15rem;
+        width: 15rem;
+    }
+
+    #container #body #description{
+        margin: 0;
+        padding: 0;
+        flex-direction: column;
+        margin-top: 1rem;
+    }
+
+    #container #body #description p{
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    #container #weather input{
+        width: 10rem;
+    }
+}
+
+
+@media (min-width: 600px){
+    header .menu{
+        display: none;
+    }
+
+    nav button{
+        margin: 0rem 2rem;
+        font-size: 1rem;
+    }
 }

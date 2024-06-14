@@ -7,15 +7,17 @@ const weather = () => {
     h1.id = 'weatherH1';
     h1.innerHTML = 'Where do you want to find the weather in?';
     const div = document.createElement('div');
+    const label = document.createElement('label');
+    label.innerHTML = 'Enter The City';
+    label.htmlFor = 'input'
     const input = document.createElement('input');
     input.id = 'input';
-    input.placeholder = 'Input the location';
     input.maxLength = '15';
     input.minLength = '2';
     const button = document.createElement('button');
     button.addEventListener('click',()=>{
         if(input.value !== ''){
-            apiHandler(input.value);
+            apiHandler(input.value.toUpperCase());
         }else{
             window.alert('insert the city');
         }
@@ -40,6 +42,7 @@ const weather = () => {
     const h2_2 = document.createElement('h2');
     h2_2.innerHTML = 'Wind Speed:';
     div.appendChild(input);
+    div.appendChild(label);
     div.appendChild(button);
     body.appendChild(div);
     body.appendChild(image);
